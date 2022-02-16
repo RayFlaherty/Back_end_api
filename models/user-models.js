@@ -1,7 +1,7 @@
 const {Schema, model} = require ('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-const UserSchema = new User(
+const UserSchema = new Schema(
     {
         userName:{
             type: String,
@@ -16,6 +16,7 @@ const UserSchema = new User(
         thoughts:[
             {
             type:Schema.Types.ObjectId,
+            ref:'Thought'
             }
         ]
     },
@@ -30,7 +31,7 @@ const UserSchema = new User(
     }
 )
 
-userSchema.plugin(uniqueValidator);
+//UserSchema.plugin(uniqueValidator);
 
 const User = model ('User', UserSchema);
 

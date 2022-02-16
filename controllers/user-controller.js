@@ -1,12 +1,12 @@
 //const res = require('express/lib/response');
-const {User} = require ('../models');
+const { User } = require ('../models');
 //const { db } = require('../models/thoughts');
 
 const userController= {
     getAllUsers(req, res){
         User.find({})
         .populate({
-            path:'comments',    
+            path:'thoughts',    
             select:'_v'
         })
         .select('_v')
@@ -21,7 +21,7 @@ const userController= {
     getUserById({params}, res) {
         User.findOne({_id: params.id})
             .populate({
-                path:'comments',
+                path:'thoughts',
                 select:'_v' 
             })
             .select('_v')
