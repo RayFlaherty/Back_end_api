@@ -1,5 +1,5 @@
-const {Schema, model, Types, trusted} = require ('mongoose');
-const dateformat = require('../utils/dateformat');
+const {Schema, model, Types} = require ('mongoose');
+
 const dateFormat = require('../utils/dateformat');
 
 const thoughtSchema = new Schema(

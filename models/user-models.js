@@ -31,7 +31,7 @@ const UserSchema = new Schema(
     }
 )
 
-//UserSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator);
 
 const User = model ('User', UserSchema);
 
