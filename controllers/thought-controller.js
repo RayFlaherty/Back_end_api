@@ -1,5 +1,5 @@
 const {Thought, User}= require('../models'); 
-const { db } = require('../models/user-models');
+//const { db } = require('../models/user-models');
 
 const thoughtController = {
     addThought({ params, body}, res){

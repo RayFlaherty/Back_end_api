@@ -4,28 +4,34 @@ const { User } = require ('../models');
 
 const userController= {
     getAllUsers(req, res){
+        console.log('test')
         User.find({})
-        .populate({
-            path:'thoughts',    
-            select:'_v'
-        })
-        .select('_v')
-        .sort({_id:-1})
-        .then(dbUserData=> res.json(dbUserData))
-        .catch(err=> {
-            console.log(err);
-            res.sendStatus(400);
-        })
+            .select('-__v')
+            .then(dbUserData=> {
+               console.log(dbUserData)
+               res.json(dbUserData)
+           })
+            
+    
+        // .populate({
+        //     path:'thought',    
+        //     select:'-__v'
+        // })
+        // .select('-__v')
+        // .sort({_id:-1})
+        // .then(dbUserData=> res.json(dbUserData))
+        // .catch(err=> {
+        //     console.log(err);
+        //     res.sendStatus(400);
+        // })
     },
 
     getUserById({params}, res) {
         User.findOne({_id: params.id})
-            .populate({
-                path:'thoughts',
-                select:'_v' 
-            })
-            .select('_v')
+            .populate('thoughts')
+            .select('-__v')
             .then(dbUserData=> {
+                console.log(dbUserData)
                 if(!dbUserData){
                     res.status(404).json({message: `No User with this ID!`});
                     return;
