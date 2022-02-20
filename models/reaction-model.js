@@ -2,14 +2,14 @@ const {Schema, model, Types} = require ('mongoose');
 
 const dateFormat = require ('../utils/dateformat')
 
-const ReplySchema = new Schema (
+const ReactionSchema = new Schema (
     {
-        replyBy:{
+        reactionBy:{
             type: String,
             required: true,
             new : true
         },
-        replyText: {
+        reactionText: {
             type:String,
             required:true,
             trim: true
@@ -18,17 +18,21 @@ const ReplySchema = new Schema (
             type: Date,
             default: Date.now,
             get:createdAtVal => dateFormat(createdAtVal)
-        },
-        toJson: {
+        }
+    },
+     {   
+         toJson: {
             getters:true
         }
+
     }
+    
 );
 
-ReplySchema.virtual('reactionCount').get(function(){
+ReactionSchema.virtual('reactionCount').get(function(){
     return this.reaction.length;
 })
 
-const Reply = model('Reaction',ReplySchema)
+const Reaction = model('Reaction',ReactionSchema)
 
-module.exports= Reply;
+module.exports= Reaction;
