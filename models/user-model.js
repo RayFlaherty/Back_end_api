@@ -34,7 +34,7 @@ const UserSchema = new Schema(
 UserSchema.plugin(uniqueValidator);
 
 UserSchema.virtual('thoughtCount').get(function(){
-    return this.thoughts.length
+    return this.thought.length
 })
 
 const User = model ('User', UserSchema);

@@ -1,34 +1,34 @@
-//const res = require('express/lib/response');
+// const res = require('express/lib/response');
 const { User } = require ('../models');
-//const { db } = require('../models/thoughts');
+// const { db } = require('../models/thought-model');
 
 const userController= {
     getAllUsers(req, res){
-        console.log('test')
         User.find({})
-            .select('-__v')
-            .then(dbUserData=> {
-               console.log(dbUserData)
-               res.json(dbUserData)
-           })
-            
+        .populate({
+            path:'thought',    
+            select:'-__v',
+            strictPopulate: false
+        })
+        .select('-__v')
+        .sort({_id:-1})
+        .then(dbUserData=> res.json(dbUserData))
+        .catch(err=> {
+            console.log(err);
+            res.sendStatus(400);
+        })
+        
     
-        // .populate({
-        //     path:'thought',    
-        //     select:'-__v'
-        // })
-        // .select('-__v')
-        // .sort({_id:-1})
-        // .then(dbUserData=> res.json(dbUserData))
-        // .catch(err=> {
-        //     console.log(err);
-        //     res.sendStatus(400);
-        // })
+      
     },
 
     getUserById({params}, res) {
         User.findOne({_id: params.id})
-            .populate('thoughts')
+            .populate({
+                path: 'thought',
+                select:'-__v',
+                strictPopulate: false
+            })
             .select('-__v')
             .then(dbUserData=> {
                 console.log(dbUserData)

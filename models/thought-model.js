@@ -20,7 +20,7 @@ const ThoughtSchema = new Schema(
             default: Date.now,
             get:createdAtVal => dateFormat(createdAtVal)
         },
-        reaction: [
+        reaction: [ 
             {
                 type:Schema.Types.ObjectId,
                 ref:'Reaction'
@@ -29,8 +29,10 @@ const ThoughtSchema = new Schema(
     },
     {
         toJSON:{
+            virtuals:true,
             getters: true
-        }
+        },
+        id:false
     }
 );
 
