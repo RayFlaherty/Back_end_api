@@ -7,6 +7,7 @@ const userController= {
         User.find({})
         .populate({
             path:'thought',    
+            populate: {path: 'reaction'},
             select:'-__v',
             strictPopulate: false
         })

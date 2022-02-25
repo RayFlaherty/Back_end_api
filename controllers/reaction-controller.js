@@ -6,7 +6,7 @@ const reactionController = {
         console.log(body);
         Reaction.create(body)
         .then(({_id}) => {
-            return thought.findOneAndUpdate(
+            return Thought.findOneAndUpdate(
                 {_id: params.thoughtId},
                 {$push: {reaction: _id}},
                 {new: true}
@@ -22,7 +22,7 @@ const reactionController = {
         .catch(err=> res.json(err));
     },
     removeReaction({params}, res) {
-        Reaction.findOneAndDelete({_id: params.replyId})
+        Reaction.findOneAndDelete({_id: params.reactionId})
         .then(deletedReaction=> {
             if(!deletedReaction) {
                 return res.status(400).json({message: "No thought with this Id"})
@@ -35,7 +35,7 @@ const reactionController = {
         })
         .then(dbUserData => {
             if(!dbUserData){
-                res.status(404).json({message:"No User Found with this Id!"})
+                res.status(404).json({message:"No reaction Found with this Id!"})
                 return;
             }
             res.json(dbUserData)
