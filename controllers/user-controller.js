@@ -27,6 +27,7 @@ const userController= {
         User.findOne({_id: params.id})
             .populate({
                 path: 'thought',
+                populate: {path: 'reaction'},
                 select:'-__v',
                 strictPopulate: false
             })
